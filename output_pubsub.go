@@ -159,7 +159,16 @@ func FLBPluginFlush(data unsafe.Pointer, length C.int, tag *C.char) int {
 		if ret != 0 { // don't rest
 			break
 		}
-		timestamp := ts.(output.FLBTime)
+		var timestamp time.Time
+		switch t := ts.(type) {
+		case output.FLBTime:
+			timestamp = ts.(output.FLBTime).Time
+		case uint64:
+			timestamp = time.Unix(int64(t), 0)
+		default:
+			fmt.Println("time provided invalid, defaulting to now.")
+			timestamp = time.Now()
+		}
 		for k, v := range record {
 			//fmt.Printf("[%s] %s %s %v \n", tagname, timestamp.String(), k, v)
 			_, _, _ = k, timestamp, tagname
