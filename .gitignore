@@ -1,3 +1,5 @@
 .idea
 local_env.sh
 coverage.txt
+.envrc
+jwt.json
