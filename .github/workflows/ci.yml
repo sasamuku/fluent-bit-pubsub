@@ -1,0 +1,45 @@
+name: go-ci
+
+on:
+  push:
+    branches:
+      - test_ci
+
+env:
+  PROJECT_ID: ${{ secrets.PROJECT_ID }}
+  TOPIC_NAME: ${{ secrets.TOPIC_NAME }}
+  JWT_PATH: '/jwt.json'
+  _JWT: ${{ secrets._JWT }}
+  GOPATH: '/go'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Set up
+      uses: actions/setup-go@v2
+      with:
+        go-version: ^1.13
+      id: go
+
+    - name: Check out
+      uses: actions/checkout@v2
+
+    - name: Cache
+      uses: actions/cache@v2.1.0
+      with:
+        path: ~/go/pkg/mod
+        key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
+        restore-keys: |
+          ${{ runner.os }}-go-
+    
+    - name: Get jwt file
+      run: echo $_JWT > jwt.json
+
+    - name: Run unit test
+      run: bash local.sh test
+      env: 
+        GO111MODULE: "on"
+
+    - name: CODECOV
+      run: bash local.sh codecov
