@@ -10,7 +10,6 @@ env:
   TOPIC_NAME: ${{ secrets.TOPIC_NAME }}
   JWT_PATH: '/jwt.json'
   _JWT: ${{ secrets._JWT }}
-  GOPATH: '/go'
 
 jobs:
   test:
