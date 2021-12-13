@@ -1,14 +1,11 @@
 name: go-ci
 
-on:
-  push:
-    branches:
-      - test_ci
+on: push
 
 env:
   PROJECT_ID: ${{ secrets.PROJECT_ID }}
   TOPIC_NAME: ${{ secrets.TOPIC_NAME }}
-  JWT_PATH: '/jwt.json'
+  JWT_PATH: './jwt.json'
   _JWT: ${{ secrets._JWT }}
 
 jobs:
@@ -38,7 +35,7 @@ jobs:
     - name: Run unit test
       run: bash local.sh test
       env: 
-        GO111MODULE: "on"
+        GO111MODULE: 'on'
 
     - name: CODECOV
       run: bash local.sh codecov
