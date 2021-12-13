@@ -35,7 +35,10 @@ jobs:
     - name: Get jwt file
       run: echo $_JWT > jwt.json
     
-    - name: Get jwt file
+    - name: pwd
+      run: pwd
+    
+    - name: ls
       run: ls -la
 
     - name: Run unit test
