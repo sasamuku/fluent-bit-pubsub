@@ -8,7 +8,7 @@ on:
 env:
   PROJECT_ID: ${{ secrets.PROJECT_ID }}
   TOPIC_NAME: ${{ secrets.TOPIC_NAME }}
-  JWT_PATH: '/jwt.json'
+  JWT_PATH: './jwt.json'
   _JWT: ${{ secrets._JWT }}
 
 jobs:
@@ -34,15 +34,6 @@ jobs:
     
     - name: Get jwt file
       run: echo $_JWT > jwt.json
-    
-    - name: pwd
-      run: pwd
-    
-    - name: export
-      run: export JWT_PATH=$GITHUB_WORKSPACE$JWT_PATH
-    
-    - name: printenv
-      run: printenv JWT_PATH
 
     - name: Run unit test
       run: bash local.sh test
