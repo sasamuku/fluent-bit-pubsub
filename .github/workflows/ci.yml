@@ -38,8 +38,11 @@ jobs:
     - name: pwd
       run: pwd
     
-    - name: ls
-      run: ls -la
+    - name: export
+      run: export JWT_PATH=$GITHUB_WORKSPACE$JWT_PATH
+    
+    - name: printenv
+      run: printenv JWT_PATH
 
     - name: Run unit test
       run: bash local.sh test
