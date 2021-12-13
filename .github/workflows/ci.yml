@@ -8,7 +8,7 @@ on:
 env:
   PROJECT_ID: ${{ secrets.PROJECT_ID }}
   TOPIC_NAME: ${{ secrets.TOPIC_NAME }}
-  JWT_PATH: '~/jwt.json'
+  JWT_PATH: '/jwt.json'
   _JWT: ${{ secrets._JWT }}
 
 jobs:
